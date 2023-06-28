@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="cf4da5e3-c075-4729-bae9-74b558bfa006" >
+		<http:listener-connection host="localhost" port="8080" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="011f5580-a97e-4202-8568-4054b20492ea" />
+	<flow name="mainflow" doc:id="d6811ec8-1693-4ca6-8e96-6795018a6844" >
+		<http:listener doc:name="Listener" doc:id="9cb66bf6-4d15-4b49-aba8-ffd7dcb2d500" config-ref="HTTP_Listener_config" path="/test1"/>
+		<file:read doc:name="Reading a file" doc:id="58aed0b6-6fbe-4d77-b597-53c23a90f5c5" config-ref="File_Config" path="D:\Mule soft online\example\demo.txt"/>
+		<logger level="INFO" doc:name="Logger" doc:id="131ddc7c-2b0f-4d02-866a-88dd66a6d568" message="#[payload]"/>
+	</flow>
+</mule>
